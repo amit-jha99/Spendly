@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&display=swap');
+
+/* ------------------------------------------------------------------ */
+/* Landing hero (redesigned)                                           */
+/* All rules scoped under .hero-v2 to avoid clashing with style.css    */
+/* ------------------------------------------------------------------ */
+
+.hero-v2 {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 4rem 2rem 5rem;
+    text-align: center;
+}
+
+/* ---- Content ---- */
+
+.hero-v2-content {
+    max-width: 920px;
+    margin: 0 auto;
+}
+
+.hero-v2-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #e3f1ea;
+    color: #2f7a58;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+}
+
+.hero-v2-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: #3f9268;
+}
+
+.hero-v2-title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 4.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 1.75rem 0 0;
+}
+
+.hero-v2-accent {
+    color: #3f9268;
+}
+
+.hero-v2-subtitle {
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    line-height: 1.6;
+    color: var(--ink-muted);
+    max-width: 620px;
+    margin: 1.5rem auto 0;
+}
+
+.hero-v2-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.hero-v2-btn {
+    display: inline-block;
+    background: var(--ink);
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 1rem 1.9rem;
+    border-radius: 14px;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.hero-v2-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* ---- Dashboard mockup ---- */
+
+.hero-v2-mock {
+    max-width: 1000px;
+    margin: 3.5rem auto 0;
+    background: #f6f5f2;
+    border: 1px solid #ececec;
+    border-radius: 20px;
+    padding: 1.75rem;
+    box-shadow: 0 12px 50px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+.hero-v2 .mock-dots {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-v2 .mock-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+}
+
+.hero-v2 .mock-dot-red { background: #ed6a5a; }
+.hero-v2 .mock-dot-yellow { background: #f4c152; }
+.hero-v2 .mock-dot-green { background: #66c08a; }
+
+.hero-v2 .mock-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.hero-v2 .mock-stat {
+    background: #ffffff;
+    border: 1px solid #ececec;
+    border-radius: 14px;
+    padding: 1.25rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-v2 .mock-stat-label {
+    font-size: 0.95rem;
+    color: #8a8a8a;
+    margin-bottom: 0.6rem;
+}
+
+.hero-v2 .mock-stat-value {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.85rem;
+    color: var(--ink);
+    line-height: 1.1;
+}
+
+.hero-v2 .mock-stat-sub {
+    font-size: 0.9rem;
+    color: #9a9a9a;
+    margin-top: 0.55rem;
+}
+
+.hero-v2 .mock-sub-red { color: #c0392b; }
+.hero-v2 .mock-sub-green { color: #2f8f5f; }
+
+.hero-v2 .mock-bars-panel {
+    background: #ffffff;
+    border: 1px solid #ececec;
+    border-radius: 14px;
+    padding: 1.4rem 1.5rem;
+}
+
+.hero-v2 .mock-bar-line {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    align-items: center;
+    gap: 1.1rem;
+}
+
+.hero-v2 .mock-bar-line + .mock-bar-line {
+    margin-top: 1rem;
+}
+
+.hero-v2 .mock-bar-label {
+    text-align: right;
+    font-size: 0.95rem;
+    color: var(--ink-muted);
+}
+
+.hero-v2 .mock-bar-track {
+    height: 0.7rem;
+    width: 100%;
+    background: #ececec;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.hero-v2 .mock-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+}
+
+.hero-v2 .mock-fill-food { background: #e6a23c; }
+.hero-v2 .mock-fill-travel { background: #4f8fd6; }
+.hero-v2 .mock-fill-bills { background: #7d6fd1; }
+
+/* ---- Responsive ---- */
+
+@media (max-width: 700px) {
+    .hero-v2 .mock-stats {
+        grid-template-columns: 1fr;
+    }
+}
