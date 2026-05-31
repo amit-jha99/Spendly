@@ -4,6 +4,59 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+<style>
+    .hiw-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        background: rgba(15, 15, 15, 0.72);
+    }
+    .hiw-overlay.is-open { display: flex; }
+    .hiw-modal {
+        position: relative;
+        width: 100%;
+        max-width: 880px;
+        background: #000;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    }
+    .hiw-close {
+        position: absolute;
+        top: 0.6rem;
+        right: 0.6rem;
+        z-index: 2;
+        width: 2.2rem;
+        height: 2.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9);
+        color: #0f0f0f;
+        font-size: 1.5rem;
+        line-height: 1;
+        cursor: pointer;
+    }
+    .hiw-close:hover { background: #ffffff; }
+    .hiw-video {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+    }
+    .hiw-video iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -23,7 +76,7 @@
         </p>
         <div class="hero-v2-actions">
             <a href="{{ url_for('register') }}" class="hero-v2-btn">Create free account</a>
-            <a href="#" class="hero-v2-btn">See how it works</a>
+            <a href="#" class="hero-v2-btn" id="seeHowBtn">See how it works</a>
         </div>
     </div>
 
@@ -101,4 +154,63 @@
     </div>
 </section>
 
+<div class="hiw-overlay" id="hiwOverlay" aria-hidden="true">
+    <div class="hiw-modal" role="dialog" aria-modal="true" aria-label="See how Spendly works">
+        <button type="button" class="hiw-close" id="hiwClose" aria-label="Close video">&times;</button>
+        <div class="hiw-video">
+            <iframe id="hiwFrame"
+                    src=""
+                    title="See how Spendly works"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    (function () {
+        // Placeholder video — replace this URL later.
+        var VIDEO_URL = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0";
+
+        var openBtn  = document.getElementById("seeHowBtn");
+        var overlay  = document.getElementById("hiwOverlay");
+        var closeBtn = document.getElementById("hiwClose");
+        var frame    = document.getElementById("hiwFrame");
+
+        if (!openBtn || !overlay || !closeBtn || !frame) return;
+
+        function openModal(event) {
+            if (event) event.preventDefault();
+            frame.src = VIDEO_URL;               // load + start playback
+            overlay.classList.add("is-open");
+            overlay.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal() {
+            overlay.classList.remove("is-open");
+            overlay.setAttribute("aria-hidden", "true");
+            frame.src = "";                      // unload iframe -> stops the video
+            document.body.style.overflow = "";
+        }
+
+        openBtn.addEventListener("click", openModal);
+        closeBtn.addEventListener("click", closeModal);
+
+        // Click on the backdrop (but not the modal itself) closes it.
+        overlay.addEventListener("click", function (event) {
+            if (event.target === overlay) closeModal();
+        });
+
+        // Escape key also closes, for convenience.
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && overlay.classList.contains("is-open")) {
+                closeModal();
+            }
+        });
+    })();
+</script>
 {% endblock %}
