@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Your profile — Spendly{% endblock %}
+
+{% block head %}
+<script src="https://unpkg.com/lucide@latest"></script>
+{% endblock %}
+
+{% block content %}
+
+<section class="profile-section">
+    <div class="profile-container">
+
+        <div class="profile-header">
+            <h1 class="profile-title">Your profile</h1>
+            <p class="profile-subtitle">Account details</p>
+        </div>
+
+        <div class="profile-card">
+
+            <div class="profile-identity">
+                <div class="profile-avatar">{{ user['name'][0] | upper }}</div>
+                <div class="profile-name">{{ user['name'] }}</div>
+                <div class="profile-email">{{ user['email'] }}</div>
+            </div>
+
+            <div class="profile-details">
+                <div class="profile-row">
+                    <i data-lucide="user"></i>
+                    <div class="profile-row-text">
+                        <span class="profile-row-label">Full name</span>
+                        <span class="profile-row-value">{{ user['name'] }}</span>
+                    </div>
+                </div>
+                <div class="profile-row">
+                    <i data-lucide="mail"></i>
+                    <div class="profile-row-text">
+                        <span class="profile-row-label">Email address</span>
+                        <span class="profile-row-value">{{ user['email'] }}</span>
+                    </div>
+                </div>
+                <div class="profile-row">
+                    <i data-lucide="calendar"></i>
+                    <div class="profile-row-text">
+                        <span class="profile-row-label">Member since</span>
+                        <span class="profile-row-value">{{ user['created_at'][:10] }}</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="profile-card">
+
+            <div class="profile-card-head">
+                <i data-lucide="wallet"></i>
+                <h2 class="profile-card-title">Spending</h2>
+            </div>
+
+            {% if expenses %}
+            {% set total = expenses | sum(attribute='amount') %}
+            <div class="profile-stats">
+                <div class="profile-stat">
+                    <span class="profile-stat-value">₹{{ "%.2f" | format(total) }}</span>
+                    <span class="profile-stat-label">Total spent</span>
+                </div>
+                <div class="profile-stat">
+                    <span class="profile-stat-value">{{ expenses | length }}</span>
+                    <span class="profile-stat-label">{{ 'Expense' if expenses | length == 1 else 'Expenses' }}</span>
+                </div>
+            </div>
+
+            <ul class="profile-expense-list">
+                {% for e in expenses %}
+                <li class="profile-expense-row">
+                    <span class="profile-expense-cat">{{ e['category'] }}</span>
+                    <div class="profile-expense-meta">
+                        <span class="profile-expense-desc">{{ e['description'] or e['category'] }}</span>
+                        <span class="profile-expense-date">{{ e['date'] }}</span>
+                    </div>
+                    <span class="profile-expense-amount">₹{{ "%.2f" | format(e['amount']) }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="profile-expense-empty">No expenses yet — your spending will show up here.</p>
+            {% endif %}
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>lucide.createIcons();</script>
+{% endblock %}

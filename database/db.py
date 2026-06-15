@@ -82,6 +82,17 @@ def get_user_by_id(user_id):
     return row
 
 
+def get_expenses_for_user(user_id):
+    """Return all expense rows for a user, most recent first."""
+    conn = get_db()
+    rows = conn.execute(
+        "SELECT * FROM expenses WHERE user_id = ? ORDER BY date DESC, id DESC",
+        (user_id,),
+    ).fetchall()
+    conn.close()
+    return rows
+
+
 def create_user(name, email, password_hash):
     """Insert a new user and return the new row id."""
     conn = get_db()
