@@ -69,7 +69,7 @@ POST /register	Implemented — validates input, creates user, redirects to login
 GET /login	Implemented — renders login.html
 POST /login	Implemented — verifies credentials, sets session, redirects to landing
 GET /logout	Implemented — clears session, redirects to landing
-GET /profile	Stub — Step 4
+GET /profile	Implemented — requires login, renders profile.html with current user
 GET /expenses/add	Stub — Step 7
 GET /expenses/<id>/edit	Stub — Step 8
 GET /expenses/<id>/delete	Stub — Step 9
